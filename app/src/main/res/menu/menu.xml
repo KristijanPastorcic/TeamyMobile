@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/miPreferences"
+        android:icon="@drawable/settings"
+        android:title="@string/preferences"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/miCalendar"
+        android:icon="@drawable/calendar"
+        android:title="@string/calendar"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/miTeams"
+        android:title="@string/teams" />
+
+    <item
+        android:id="@+id/miExit"
+        android:icon="@drawable/exit"
+        android:title="@string/exit"
+        app:showAsAction="ifRoom" />
+</menu>

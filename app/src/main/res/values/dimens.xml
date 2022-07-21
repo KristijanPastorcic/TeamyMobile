@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="title_text_size">24sp</dimen>
+    <dimen name="main_padding">15dp</dimen>
+    <dimen name="mt_10">10dp</dimen>
+    <dimen name="text_padding">5dp</dimen>
+    <dimen name="btnTextSize">10sp</dimen>
+    <dimen name="mb_10">10dp</dimen>
+    <dimen name="mcvCornerRadius">8dp</dimen>
+</resources>
