@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -46,6 +47,10 @@ class JoinTeamActivity : AppCompatActivity() {
         _binding.btnJoinTeam.setOnClickListener {
             createJoinTeamRequest()
         }
+
+/*        _binding.etTeamName.doOnTextChanged { text, _, _, _ ->
+
+        }*/
 
 
     }
