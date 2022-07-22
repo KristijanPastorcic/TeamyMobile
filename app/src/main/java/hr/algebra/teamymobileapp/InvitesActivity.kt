@@ -4,6 +4,9 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -12,10 +15,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.GsonBuilder
 import hr.algebra.teamymobileapp.databinding.ActivityInvitesBinding
-import hr.algebra.teamymobileapp.framework.Adapter
-import hr.algebra.teamymobileapp.framework.AdapterInvites
-import hr.algebra.teamymobileapp.framework.goToTeamsActivity
-import hr.algebra.teamymobileapp.framework.showToast
+import hr.algebra.teamymobileapp.framework.*
 import hr.algebra.teamymobileapp.models.InviteUserInfo
 import hr.algebra.teamymobileapp.models.InviteUserItem
 import hr.algebra.teamymobileapp.models.TeamInfo
@@ -44,6 +44,53 @@ class InvitesActivity : AppCompatActivity() {
         getTeams(id)
         getInvitations(id)
         setupListeners()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_teams, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.miPreferences -> {
+                goToTeamsActivity()
+                return true
+            }
+            R.id.miPreferences -> {
+                showSettings()
+                return true
+            }
+            R.id.miExit -> {
+                exitAppAndLogout()
+                return true
+            }
+            R.id.miJoinTeam -> {
+                goToJoinTeamActivity()
+                return true
+            }
+            R.id.miInvites -> {
+                goToInvitesActivity()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun exitAppAndLogout() {
+        AlertDialog.Builder(this).apply {
+            setTitle(R.string.logout)
+            setMessage(getString(R.string.leaving))
+            setIcon(R.drawable.exit)
+            setCancelable(true)
+            setPositiveButton(getString(R.string.ok)) { _, _ ->
+                preferences.edit().remove(LOGIN_KEY_UID).apply()
+                // TODO: exit the damon app on back or logout btn, don't go to login activity
+                finish()
+            }
+            setNegativeButton(getString(R.string.cancel), null)
+            show()
+        }
     }
 
     private fun getInvitations(id: Int) {

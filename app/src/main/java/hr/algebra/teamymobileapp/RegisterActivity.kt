@@ -51,8 +51,8 @@ class RegisterActivity : AppCompatActivity() {
         pwd: String,
         pwd2: String
     ) {
-/*        if (!validateInput())
-            return*/
+        if (!validateInput())
+            return
         volleyRequestQueue = Volley.newRequestQueue(this)
 
         val postData = JSONObject()

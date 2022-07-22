@@ -12,7 +12,7 @@ import hr.algebra.teamymobileapp.databinding.ActivityMainBinding
 import hr.algebra.teamymobileapp.framework.*
 import java.util.*
 
-
+private const val CHOSEN_DATE_KEY = "hr.algebra.TeamsActivity.chosendatekey"
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +49,59 @@ class MainActivity : AppCompatActivity() {
         timer.scheduleAtFixedRate(TimeTask(), 0, 500)
     }
 
+    private fun showCalendar() {
+        val initialDate = Calendar.getInstance()
+        if (preferences.contains(CHOSEN_DATE_KEY)) {
+            initialDate.timeInMillis = preferences.getLong(CHOSEN_DATE_KEY, -1)
+        }
+        val initialYear = initialDate.get(Calendar.YEAR)
+        val initialMonth = initialDate.get(Calendar.MONTH)
+        val initialDayOfMonth = initialDate.get(Calendar.DAY_OF_MONTH)
 
+        DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                Calendar.getInstance().apply {
+                    set(year, month, dayOfMonth)
+                    preferences
+                        .edit()
+                        .putLong(CHOSEN_DATE_KEY, timeInMillis)
+                        .apply()
+                    setDate()
+                }
+            }, initialYear,
+            initialMonth,
+            initialDayOfMonth
+        ).show()
+    }
+
+
+    //set todays date on launch
+    private fun setDate() {
+        if (preferences.contains(CHOSEN_DATE_KEY)) {
+            val timeInMillis = preferences.getLong(CHOSEN_DATE_KEY, -1)
+            with(Date(timeInMillis)) {
+                val dateFormat = android.text.format.DateFormat.getDateFormat(this@MainActivity)
+                _binding.tvDate.text = dateFormat.format(this)
+            }
+        }
+    }
+
+    private fun exitAppAndLogout() {
+        AlertDialog.Builder(this).apply {
+            setTitle(R.string.logout)
+            setMessage(getString(R.string.leaving))
+            setIcon(R.drawable.exit)
+            setCancelable(true)
+            setPositiveButton(getString(R.string.ok)) { _, _ ->
+                preferences.edit().remove(LOGIN_KEY_UID).apply()
+                // TODO: exit the damon app on back or logout btn, don't go to login activity
+                finish()
+            }
+            setNegativeButton(getString(R.string.cancel), null)
+            show()
+        }
+    }
 
     private fun submitAction() {
         // TODO: send data to server, api for that not yet implemented

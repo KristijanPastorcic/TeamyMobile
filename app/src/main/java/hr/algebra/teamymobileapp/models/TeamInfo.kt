@@ -1,3 +1,5 @@
 package hr.algebra.teamymobileapp.models
 
-class TeamInfo :ArrayList<TeamInfoItem>()
+import java.io.Serializable
+
+class TeamInfo : ArrayList<TeamInfoItem>()

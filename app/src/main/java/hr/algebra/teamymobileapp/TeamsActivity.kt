@@ -1,13 +1,14 @@
 package hr.algebra.teamymobileapp
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -23,6 +24,7 @@ import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+
 
 private const val CHOSEN_DATE_KEY = "hr.algebra.TeamsActivity.chosendatekey"
 
@@ -41,12 +43,14 @@ class TeamsActivity : AppCompatActivity() {
         _binding = ActivityTeamsBinding.inflate(layoutInflater)
         setContentView(_binding.root)
         preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
-        // login for test
+/*        // login for test
         preferences.edit().apply {
             this.putString(LOGIN_KEY_UID, "andro@mail.com")
             this.putInt(LOGIN_KEY_ID, 13)
             apply()
-        }
+        }*/
+
+        id = preferences.getInt(LOGIN_KEY_ID, 0)
 
         // get users id
         id = androidx.preference.PreferenceManager
@@ -166,7 +170,10 @@ class TeamsActivity : AppCompatActivity() {
                 return true
             }
             R.id.miJoinTeam -> {
-                goToJoinTeamActivity()
+                /*goToJoinTeamActivity()*/
+                val i = Intent(this, JoinTeamActivity::class.java)
+                i.putExtra("teams", teams)
+                startActivity(i)
                 return true
             }
             R.id.miInvites -> {

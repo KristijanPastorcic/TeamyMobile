@@ -45,8 +45,8 @@ class LoginActivity : AppCompatActivity() {
 
     // validate input beforehand
     private fun authUser(uid: String, pwd: String) {
-/*        if (!validateInput())
-            return*/
+        if (!validateInput())
+            return
         volleyRequestQueue = Volley.newRequestQueue(this)
         val parameters: MutableMap<String, String> = HashMap()
         // Add your parameters in HashMap
@@ -68,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
                         this.putInt(LOGIN_KEY_ID, id)
                         apply()
                     }
-                    goToMain()
+                    goToTeamsActivity()
                 } else{
                     showToast(getString(R.string.wrong_uid_or_pwd))
                 }

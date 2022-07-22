@@ -32,7 +32,13 @@
         <activity
             android:noHistory="true"
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:noHistory="true"
             android:name=".SettingsActivity"
@@ -45,11 +51,6 @@
             android:name=".TeamsActivity"
             android:exported="true"
             android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
