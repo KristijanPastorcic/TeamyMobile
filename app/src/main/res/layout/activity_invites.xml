@@ -29,7 +29,7 @@
     <!--TODO: autocomlete serch users to invite-->
 
     <AutoCompleteTextView
-        android:id="@+id/ddlTeams"
+        android:id="@+id/etTeamName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/etEmail"
@@ -49,12 +49,11 @@
         android:textAllCaps="false" />
 
 
-
     <TextView
         android:id="@+id/tvInvites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ddlTeams"
+        android:layout_below="@id/etTeamName"
         android:layout_marginStart="1dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -63,11 +62,22 @@
         android:textSize="32sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/header"
+        android:textColor="@android:color/black"
+        android:layout_marginStart="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/teams"
+        android:layout_below="@id/tvInvites"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/invitesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvInvites"
+        android:layout_below="@id/header"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:nestedScrollingEnabled="true"

@@ -12,7 +12,7 @@ import hr.algebra.teamymobileapp.databinding.ActivityMainBinding
 import hr.algebra.teamymobileapp.framework.*
 import java.util.*
 
-private const val CHOSEN_DATE_KEY = "hr.algebra.MainActivity.chosendatekey"
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,12 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(_binding.root)
         preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this)
 
-        // login for test
-        preferences.edit().apply {
-            this.putString(LOGIN_KEY_UID, "andro@mail.com")
-            this.putInt(LOGIN_KEY_ID, 13)
-            apply()
-        }
+
 
         //timer
         dataHelper = DataHelper(applicationContext)
@@ -125,84 +120,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
+    override fun onBackPressed() {
+        goToTeamsActivity()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.miPreferences -> {
-                showSettings()
-                return true
-            }
-            R.id.miCalendar -> {
-                showCalendar()
-                return true
-            }
-            R.id.miExit -> {
-                exitAppAndLogout()
-                return true
-            }
-            R.id.miTeams->{
-                goToTeamsActivity()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
-    private fun showCalendar() {
-        val initialDate = Calendar.getInstance()
-        if (preferences.contains(CHOSEN_DATE_KEY)) {
-            initialDate.timeInMillis = preferences.getLong(CHOSEN_DATE_KEY, -1)
-        }
-        val initialYear = initialDate.get(Calendar.YEAR)
-        val initialMonth = initialDate.get(Calendar.MONTH)
-        val initialDayOfMonth = initialDate.get(Calendar.DAY_OF_MONTH)
-
-        DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
-                Calendar.getInstance().apply {
-                    set(year, month, dayOfMonth)
-                    preferences
-                        .edit()
-                        .putLong(CHOSEN_DATE_KEY, timeInMillis)
-                        .apply()
-                    setDate()
-                }
-            }, initialYear,
-            initialMonth,
-            initialDayOfMonth
-        ).show()
-    }
-
-    //set todays date on launch
-    private fun setDate() {
-        if (preferences.contains(CHOSEN_DATE_KEY)) {
-            val timeInMillis = preferences.getLong(CHOSEN_DATE_KEY, -1)
-            with(Date(timeInMillis)) {
-                val dateFormat = android.text.format.DateFormat.getDateFormat(this@MainActivity)
-                _binding.tvDate.text = dateFormat.format(this)
-            }
-        }
-    }
-
-    private fun exitAppAndLogout() {
-        AlertDialog.Builder(this).apply {
-            setTitle(R.string.logout)
-            setMessage(getString(R.string.leaving))
-            setIcon(R.drawable.exit)
-            setCancelable(true)
-            setPositiveButton(getString(R.string.ok)) { _, _ ->
-                preferences.edit().remove(LOGIN_KEY_UID).apply()
-                // TODO: exit the damon app on back or logout btn, don't go to login activity
-                finish()
-            }
-            setNegativeButton(getString(R.string.cancel), null)
-            show()
-        }
-    }
 }

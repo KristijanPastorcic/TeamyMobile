@@ -80,4 +80,11 @@
     <string name="select_your_team">Select your team</string>
     <string name="send_request">Send request</string>
     <string name="please_enter_team_name">Please enter team name</string>
+    <string name="request_not_sent">Request not sent</string>
+    <string name="wrong_team_entered">Wrong team entered</string>
+    <string name="email_not_entered">Email not entered</string>
+    <string name="team_name_not_entered">Team name not entered</string>
+    <string name="sending_accept">Sending accept</string>
+    <string name="sending_decline">Sending decline</string>
+    <string name="enter_your_email">Enter your email</string>
 </resources>

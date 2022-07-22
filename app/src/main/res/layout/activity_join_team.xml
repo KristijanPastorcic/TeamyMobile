@@ -44,27 +44,29 @@
         />
 
     <TextView
-        android:id="@+id/requests"
+        android:id="@+id/tvRequestsHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/etTeamName"
         android:layout_marginStart="1dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/requests_from_users"
+        android:text="@string/request_to_join"
         android:textColor="@android:color/black"
         android:textSize="32sp"
         android:textStyle="bold" />
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/joinTeamsRecyclerView"
+        android:id="@+id/invitesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/requests"
+        android:layout_below="@id/tvRequestsHeader"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:nestedScrollingEnabled="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
 
 </RelativeLayout>

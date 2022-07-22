@@ -1,16 +1,14 @@
 package hr.algebra.teamymobileapp.framework
 
-import android.content.ContentUris
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -20,7 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hr.algebra.teamymobileapp.R
 import hr.algebra.teamymobileapp.models.TeamInfo
 import org.json.JSONObject
-import java.nio.file.Files.delete
 
 
 class Adapter(private val context: Context, private val teamInfo: TeamInfo) :
@@ -29,7 +26,7 @@ class Adapter(private val context: Context, private val teamInfo: TeamInfo) :
     val TAG = "Adapter_LoginActivity"
 
     class ViewHolderAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val teamName: TextView = itemView.findViewById(R.id.tvTeamName)
+        val teamName: TextView = itemView.findViewById(R.id.etTeamName)
         val dateCreated: TextView = itemView.findViewById(R.id.tvDate)
         val owner: TextView = itemView.findViewById(R.id.tvOwner)
         val btnDelete = itemView.findViewById<FloatingActionButton>(R.id.btn_delete_teams)
@@ -40,6 +37,10 @@ class Adapter(private val context: Context, private val teamInfo: TeamInfo) :
             R.layout.model_team_list_item,
             parent, false
         )
+        view.setOnClickListener{
+            val activity = context as Activity
+            activity.goToMain()
+        }
         return ViewHolderAdapter(view)
     }
 
@@ -76,7 +77,8 @@ class Adapter(private val context: Context, private val teamInfo: TeamInfo) :
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.POST, uri, postData,
-            { _ ->
+            {
+                // TODO: fix com.android.volley.ParseError: org.json.JSONException: End of input at character 0 of
                 Toast.makeText(context, context.getString(R.string.successful_delete), Toast.LENGTH_LONG).show()
             }
         ) { error ->
